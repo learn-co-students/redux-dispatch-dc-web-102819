@@ -7,7 +7,24 @@ function changeState(state, action){
   }
 }
 
+function render() { 
+  document.body.textContent = state.count
+}
+
 let state = {count: 0}
 let action = {type: 'INCREASE_COUNT'}
 
-changeState(state, action)
+function dispatch(action) {
+  state = changeState(state, action)
+  render()
+}
+
+dispatch(action)
+dispatch(action)
+
+function superDispatch(...actions) {
+  for (let action of actions) {
+    state = changeState(state, action)
+  }
+  render()
+}
